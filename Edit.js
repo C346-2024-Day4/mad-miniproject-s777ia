@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import { LinearGradient } from "expo-linear-gradient";
 
 const Edit = ({ route, navigation }) => {
     const { item, dataSource, updateDataSource } = route.params;
@@ -70,6 +71,10 @@ const Edit = ({ route, navigation }) => {
     };
 
     return (
+        <LinearGradient
+        colors={["#000000", "#001740"]}
+        style={styles.gradient}
+    >
         <View style={styles.container}>
             <View style={styles.input}>
                 <RNPickerSelect
@@ -116,17 +121,21 @@ const Edit = ({ route, navigation }) => {
                 <Text style={styles.buttonText}>DELETE</Text>
             </TouchableOpacity>
         </View>
+        </LinearGradient>
     );
 };
 
 export default Edit;
 
 const styles = StyleSheet.create({
+    gradient: {
+        flex: 1
+    },
+
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#1E1E2A",
         padding: 20,
     },
     input: {

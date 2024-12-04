@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import data from './Data';
+import { LinearGradient } from "expo-linear-gradient";
 
 const Add = ({ navigation }) => {
     const [amount, setAmount] = useState(0);
@@ -56,6 +57,10 @@ const Add = ({ navigation }) => {
     };
     
     return (
+        <LinearGradient
+        colors={["#000000", "#001740"]}
+        style={styles.gradient}
+    >
         <View style={styles.container}>
             <View style={styles.input}>
                 <RNPickerSelect
@@ -113,17 +118,21 @@ const Add = ({ navigation }) => {
             </TouchableOpacity>
 
         </View>
+        </LinearGradient>
     );
 };
 
 export default Add;
 
 const styles = StyleSheet.create({
+    gradient: {
+        flex: 1
+    },
+
     container: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#1E1E2A",
         padding: 20,
     },
     input: {

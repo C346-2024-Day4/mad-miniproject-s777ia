@@ -4,6 +4,8 @@ import dataFile from './Data.js';
 import Icon from "react-native-vector-icons/FontAwesome6";
 import Icon2 from "react-native-vector-icons/FontAwesome5";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import { LinearGradient } from "expo-linear-gradient";
+
 
 const Home = ({ navigation, route }) => {
     const [dataSource, setDataSource] = useState(dataFile.dataSource); // Use the data from Data.js
@@ -68,19 +70,19 @@ const Home = ({ navigation, route }) => {
                         {showDeficitSurplus ? (
                             <View style={styles.deficitSurplusContainer}>
                                 <View style={styles.deficitContainer}>
-                                    <Text style={styles.deficitSurplusTitle}>Deficit:</Text>
+                                    <Text style={styles.deficitSurplusTitle}>DEFICIT:</Text>
                                     <Text style={styles.deficitSurplusAmount}>${deficit}</Text>
                                 </View>
                                 <View style={styles.surplusContainer}>
-                                    <Text style={styles.deficitSurplusTitle}>Surplus:</Text>
+                                    <Text style={styles.deficitSurplusTitle}>SURPLUS:</Text>
                                     <Text style={styles.deficitSurplusAmount}>${surplus}</Text>
                                 </View>
                             </View>
                         ) : (
                             <View style={styles.income}>
                                 <View>
-                                <Text style={styles.incomeTitle}>TOTAL INCOME:</Text>
-                                <Text style={styles.incomeAmount}>${item.amount}</Text>
+                                    <Text style={styles.incomeTitle}>TOTAL INCOME:</Text>
+                                    <Text style={styles.incomeAmount}>${item.amount}</Text>
                                 </View>
                                 <Text style={styles.incomeCurrency}>SGD</Text>
                             </View>
@@ -127,48 +129,56 @@ const Home = ({ navigation, route }) => {
     };
 
     return (
-        <View style={styles.container}>
-            {/* SectionList for Income and Expenses */}
-            <SectionList
-                sections={dataSource}
-                keyExtractor={(item) => item.key}
-                renderItem={renderItem}
-                renderSectionHeader={renderSectionHeader}
-            />
-    
-            {/* Total Expenses by Category */}
-            <View>
-                <Text style={styles.totalExpensesTitle}>Total Expenses: ${dataSource[1]?.data.reduce((sum, item) => sum + item.amount, 0)}</Text>
-                <View style={styles.expenseSummary}>
-                    {expenseTotals.map((item) => (
-                        <View key={item.category} style={styles.card}>
-                            <View style={styles.cardIcon}>{displayIcon(item.category)}</View>
-                            <Text style={styles.cardCategory}>{item.category.toUpperCase()}</Text>
-                            <Text style={styles.cardTotal}>${item.total}</Text>
-                        </View>
-                    ))}
+        <LinearGradient
+            colors={["#000000", "#001740"]}
+            style={styles.gradient}
+        >
+            <View style={styles.container}>
+                {/* SectionList for Income and Expenses */}
+                <SectionList
+                    sections={dataSource}
+                    keyExtractor={(item) => item.key}
+                    renderItem={renderItem}
+                    renderSectionHeader={renderSectionHeader}
+                />
+
+                {/* Total Expenses by Category */}
+                <View>
+                    <Text style={styles.totalExpensesTitle}>Total Expenses: ${dataSource[1]?.data.reduce((sum, item) => sum + item.amount, 0)}</Text>
+                    <View style={styles.expenseSummary}>
+                        {expenseTotals.map((item) => (
+                            <View key={item.category} style={styles.card}>
+                                <View style={styles.cardIcon}>{displayIcon(item.category)}</View>
+                                <Text style={styles.cardCategory}>{item.category.toUpperCase()}</Text>
+                                <Text style={styles.cardTotal}>${item.total}</Text>
+                            </View>
+                        ))}
+                    </View>
                 </View>
+
+                {/* Add Button */}
+                <TouchableOpacity
+                    style={styles.addButton}
+                    onPress={() => navigation.navigate("Add", { dataSource })}
+                >
+                    <Icon name={"plus"} size={30} color="#FFFFFF" />
+                </TouchableOpacity>
             </View>
-    
-            {/* Add Button */}
-            <TouchableOpacity
-                style={styles.addButton}
-                onPress={() => navigation.navigate("Add", { dataSource })}
-            >
-                <Icon name={"plus"} size={30} color="#FFFFFF" />
-            </TouchableOpacity>
-        </View>
+        </LinearGradient>
     );
-    
+
 };
 
 export default Home;
 
 
 const styles = StyleSheet.create({
+    gradient: {
+        flex: 1, 
+    },
+    
     container: {
         flex: 1,
-        backgroundColor: "#0A0E21",
         padding: 20,
         paddingVertical: 80,
     },
@@ -192,7 +202,7 @@ const styles = StyleSheet.create({
     },
 
     incomeCard: {
-        backgroundColor: "#12345D", // Original card color
+        backgroundColor: "#4A90E2", // Original card color
         borderRadius: 15,
         padding: 20,
         marginBottom: 20,
@@ -213,7 +223,7 @@ const styles = StyleSheet.create({
     },
     deficitSurplusTitle: {
         color: "#FFFFFF",
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: "bold",
     },
     deficitSurplusAmount: {
@@ -232,8 +242,9 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     incomeCurrency: {
-        color: "#B9B9B9",
+        color: "#F5F5F5",
         fontSize: 14,
+        fontWeight: 600
     },
 
     // Expense Cards
