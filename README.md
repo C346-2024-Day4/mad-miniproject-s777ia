@@ -1,4 +1,4 @@
-![Screenshot_1](https://github.com/user-attachments/assets/f81f66fa-b52b-4536-b17f-8ed89bf70fc3)## **What is this app about?**
+## **What is this app about?**
 This is a React Native application designed to help users manage their income and expenses. The app provides a clean interface for logging income and tracking expenses by category. Users can view a detailed breakdown of expenses and analyze their financial status (deficit/surplus).
 
 ## **What features does it have?**
