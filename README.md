@@ -24,6 +24,8 @@ This is a React Native application designed to help users manage their income an
 
 ## **Video Walkthrough of the App**
 
-https://github.com/user-attachments/assets/ad241b82-6e61-4ba3-80de-7e1212cb1c92
+https://github.com/user-attachments/assets/3dc420bf-3115-47c7-9074-187898f569e7
+
+
 
 
